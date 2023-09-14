@@ -1,0 +1,65 @@
+{% extends 'courses/base_teacher.html' %}
+{% block content %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Course Details</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    .course-card {
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      transition: transform 0.2s;
+    }
+
+    .course-card:hover {
+      transform: translateY(-4px);
+    }
+
+    .course-button {
+      margin-top: 10px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container mt-4">
+    <div class="header d-flex justify-content-between">
+      <h1>Course List</h1>
+      <h2><a href="{% url 'add-course' %}"><button class="btn btn-success">Add Course</button></a></h2>
+    </div>
+    <br>
+    <div class="row">
+      {% for course in courses %}
+      <div class="col-md-4 mb-4">
+        <div class="card course-card">
+          <div class="card-body">
+            <h5 class="card-title" style="font-weight: bold;">{{ course.name }}</h5>
+            <p class="card-text">{{ course.description }}</p>
+            <p class="card-text">Price: {{ course.price }}</p>
+            {% if course.discount > 0 %}
+            <p class="card-text">Discount: {{ course.discount }}</p>
+            {% endif %}
+            {% if course.active %}
+            <p class="card-text text-success">Active</p>
+            {% endif %}
+            <div class="d-flex flex-wrap justify-content-between align-items-center">
+              <form method="post" action="{% url 'delete-course' course.id %}">
+                {% csrf_token %}
+                <button type="submit" class="btn btn-danger course-button">Delete</button>
+              </form>
+              <a href="{% url 'update-course' course.id %}" class="btn btn-primary course-button">Update</a>
+              <a href="{% url 'content-detail' course.id %}" class="btn btn-secondary course-button">View Content</a>
+              <a href="{% url 'course-purchased-students' course.id %}" class="btn btn-info course-button">Users</a>
+            </div>
+          </div>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+  </div>
+{% endblock %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  </div>
+</body>
+</html>

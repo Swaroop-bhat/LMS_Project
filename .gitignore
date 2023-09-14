@@ -1,0 +1,7 @@
+newenv
+*.sqlite3
+
+settings.py
+
+
+files/resource/

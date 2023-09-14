@@ -1,0 +1,83 @@
+
+{% load course_custom_tags %}
+<!DOCTYPE html>
+<html>
+
+<head>
+  <title>{% block title %}Login{% endblock %}</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+
+  </style>
+</head>
+
+<body>
+  <style>
+    .container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .container_1 {
+      background-color: lightgray;
+      padding: 10px;
+      border-radius: 10px;
+      width: 500px;
+    }
+    
+    form {
+      display: flex;
+      flex-direction: column;
+      padding: 10px;
+    }
+    form input[type="email"],
+    form input[type="text"],
+    form input[type="password"] {
+      padding: 8px;
+      border: 1px solid white;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    .btn {
+      background-color: #007bff;
+      color: #efe7e7;
+      border: none;
+      padding: 10px 15px;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+  </style>
+  
+  {% block content %}
+  <div class="container mt-5">
+    <div class="container_1">
+      <h1 class="text-center">Signup page</h1>
+      <hr>
+      <form action="/signup/" method="post">
+        {% csrf_token %}
+        {% for field in form %}
+          {{ field.label }}
+          {{ field }}
+          <br>
+        {% endfor %}
+        <input type="submit" class="btn btn-primary mt-3 mb-1" value="Signup">
+      </form>
+      <a href="/login/" style="margin-left:140px;">Already have an account?</a>
+    </div>
+  </div>
+{% endblock %}
+
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
+
+

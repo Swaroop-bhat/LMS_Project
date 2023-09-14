@@ -1,0 +1,23 @@
+{% extends 'courses/base.html' %}
+{% load course_custom_tags %}
+
+{% block title %}
+OTP Verification
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <h1 class="display-1">OTP Verification</h1>
+    <hr>
+
+    <form method="post">
+        {%if errors%}
+        <p>{{errors}}</p>
+        {%endif%}
+        {% csrf_token %}
+        <label for="otp">Enter OTP:</label>
+        <input type="text" id="otp" name="otp" maxlength="6" required>
+        <button type="submit">Verify OTP</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,44 @@
+{% load course_custom_tags %}
+<!DOCTYPE html>
+<html>
+<head>
+  <title>{% block title %}OTP Verification{% endblock %}</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin-top: 250px;
+    }
+    .container {
+      width: 500px;
+      padding: 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+  </style>
+</head>
+<body>
+  {% block content %}
+  <div class="container">
+    <h1 class="text-center" style="font-size: 50px;">OTP Verification</h1>
+    <hr>
+    <form method="post">
+      {% if errors %}
+      <p class="text-danger">{{ errors }}</p>
+      {% endif %}
+      {% csrf_token %}
+      <label for="otp">Enter OTP:</label>
+      <input type="text" id="otp" name="otp" class="form-control" maxlength="6" required>
+      <button type="submit" class="btn btn-primary btn-block mt-3">Verify OTP</button>
+    </form>
+  </div>
+  {% endblock %}
+
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
+
